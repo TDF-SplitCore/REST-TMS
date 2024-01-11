@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  TMS:
+  tms:
     build: .
     environment:
       DB_U: ${PG_USER}

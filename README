@@ -1,4 +1,0 @@
-1. Указываем в файле application.yml Данные БД
-2. sudo mvn install
-3. sudo docker build -t [имя]:[тэг] ./
-4. sudo docker run -p port:port [имя]:[тэг]
