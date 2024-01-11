@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: ${db.url}
-    password: ${db.password}
-    username: ${db.username}
+    url: jdbc:postgresql://database:5432/${DB_B}
+    username: ${DB_U}
+    password: ${DB_P}
   jpa:
     hibernate:
       ddl-auto: update

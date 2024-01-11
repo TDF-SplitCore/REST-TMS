@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  TMS:
+    build: .
+    environment:
+      DB_U: ${PG_USER}
+      DB_P: ${PG_PASSWORD}
+      DB_B: ${PG_BD}
+    networks:
+      - TMS_net
+    ports:
+      - 8080:8080
+    depends_on:
+      database:
+        condition: service_healthy
+
+  database:
+    image: postgres:14
+    environment:
+      POSTGRES_DB: ${PG_BD}
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    networks:
+      - TMS_net
+    volumes:
+      - TMS_db:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready", "-U", $PG_USER ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  TMS_db:
+    name: TMS_db
+
+networks:
+  TMS_net:
+    name: TMS_net
